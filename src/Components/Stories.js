@@ -1,18 +1,18 @@
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 
-export default function Stories({produtos}) {
+export default function Stories({pessoa}) {
 
   return (
     <FlatList
-      data={produtos}
+      data={pessoa}
       renderItem={ ({item}) => 
         <View style={css.story}>
           <Image source={{ uri: item.image}} style={css.image}/>
         </View>
       }
       keyExtractor={ (item) => item.id }
-      contentContainerStyle={[css.container, { width: produtos.length * 70 }]}
+      contentContainerStyle={[css.container, { width: pessoa.length * 70 }]}
       horizontal={true}
     />
   )

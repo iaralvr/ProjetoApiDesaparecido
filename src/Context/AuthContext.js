@@ -9,23 +9,26 @@ function AuthProvider({ children }) {
     async function Login(email, senha) {
 
         if (email != "" && senha != "") {
-            await fetch('https://fakestoreapi.com/auth/login', {
+            await fetch('http://10.139.75.42:5251/api/Usuario/Login', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify({
-                    username: email,
-                    password: senha
+                    UsuarioEmail: email,
+                    UsuarioSenha: senha
                 })
             })
-                .then(res => (res.ok == true) ? res.json() : false)
-                .then(json => {
-                    setLogado((json.token) ? true : false);
-                    setError((json.token) ? false : true);
+            .then(res => res.json())
+            .then(json => {
+                if( json.usuarioId ) {
+                    setLogado( true );
+                } else {
+                    setError( true );
                 }
-                )
-                .catch(err => setError(true))
+            }
+            )
+            .catch(err => setError( true ) )
         } else {
             setError(true)
         }
